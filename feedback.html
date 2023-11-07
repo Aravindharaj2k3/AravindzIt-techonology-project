@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Feedback Rating Form</title>
+        <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f0f0f0;
+            background-image: url(feedback\ b2.avif);
+            background-position: center;
+            background-size: cover;
+            height: 40rem;
+            backdrop-filter: blur(5px);
+            background-repeat: no-repeat;
+        }
+        body img{
+            margin-left: 20px;
+            border-radius: 20px;
+            box-shadow: 2px 5px 7px black;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 50px;
+            line-height: 30px;
+            border-radius: 15px;
+            box-shadow: 5px 7px 9px black;
+        }
+        h1 {
+            text-align: center;
+        }
+        h2{
+            font-size: 55px;
+            color: white;
+            text-shadow: 2px 4px 6px black;
+        }
+        .rating-container {
+            text-align: center;
+        }
+        .star {
+            font-size: 24px;
+            color: #ccc;
+            cursor: pointer;
+        }
+        .star.active {
+            color: #ffcc00;
+        }
+        #feedback {
+            margin-top: 60px;
+            width: 100%;
+            height: 100px;
+            resize: none;
+            padding: 10px;
+            border: 1px solid black;
+            border-radius: 8px;
+        }
+        #submit-btn {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+    </head>
+    <body>
+        <h2>AravindzIT Technology</h2>
+        <div class="container">
+            <h1>Feedback Rating Form</h1>
+            <div class="rating-container">
+                <span class="star" data-rating="1">★</span>
+                <span class="star" data-rating="2">★</span>
+                <span class="star" data-rating="3">★</span>
+                <span class="star" data-rating="4">★</span>
+                <span class="star" data-rating="5">★</span>
+            </div>
+            <textarea id="feedback" placeholder="Comment your feedback here..."></textarea>
+            <button id="submit-btn">Submit</button>
+        </div>
+
+        <script>
+        const stars = document.querySelectorAll(".star");
+        const feedbackTextarea = document.getElementById("feedback");
+        const submitButton = document.getElementById("submit-btn");
+
+        let selectedRating = 0;
+
+        stars.forEach(star => {
+            star.addEventListener("click", () => {
+                const rating = parseInt(star.getAttribute("data-rating"));
+                selectedRating = rating;
+                updateStarRating();
+            });
+        });
+
+        function updateStarRating() {
+            stars.forEach(star => {
+                const rating = parseInt(star.getAttribute("data-rating"));
+                if (rating <= selectedRating) {
+                    star.classList.add("active");
+                } else {
+                    star.classList.remove("active");
+                }
+            });
+        }
+
+        submitButton.addEventListener("click", () => {
+            const feedback = feedbackTextarea.value;
+            if (selectedRating === 0) {
+                alert("Please select a rating.");
+            } else if (feedback.trim() === "") {
+                alert("Please provide feedback.");
+            } else {
+                alert(`Rating: ${selectedRating}\nFeedback: ${feedback}`);
+            }
+        });
+    </script>
+    </body>
+</html>
